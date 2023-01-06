@@ -33,8 +33,8 @@ export const WorkerPanel = () => {
             {
               key: "2",
               icon: <UserOutlined />,
-              label: <Link to="quiz">QuizGame</Link>,
-            },
+              label: <Link to="quiz">Quiz Game</Link>,
+            }
           ]}
         />
       </Sider>
@@ -71,7 +71,13 @@ export const WorkerPanel = () => {
             background: colorBgContainer,
           }}
         >
+          <Button
+          onClick={() => navigate("ranking")}
+          >
+            Ranking
+          </Button>
           <h1>User Panel zasady gry:</h1>
+
           <Outlet />
         </Content>
       </Layout>

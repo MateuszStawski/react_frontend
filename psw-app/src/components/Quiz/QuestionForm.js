@@ -1,27 +1,58 @@
 import React, { useState } from "react";
+import axios from 'axios';
 
 const QuestionForm = ({ onQuestionSubmit }) => {
-  const [questionType, setQuestionType] = useState(null);
-  const [question, setQuestion] = useState({});
+  var [questionType, setQuestionType] = useState();
+  var [questionText, setQuestionText] = useState();
+  var [questionAnswer, setQuestionAnswer] = useState();
+  var [questionBoolean, setQuestionBoolean] = useState();
 
   const handleQuestionTypeChange = (e) => {
     setQuestionType(e.target.value);
+    questionType = e.target.value
+    console.log(questionType)
   };
 
-  const handleQuestionChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "answers") {
-      setQuestion({ ...question, [name]: value.split(",") });
-    } else {
-      setQuestion({ ...question, [name]: value });
-    }
+  const handleQuestionTextChange = (e) => {
+    setQuestionText(e.target.value)
+    questionText = e.target.value
+    console.log(questionText)
+  };
+
+  const handleQuestionAnswerChange = (e) => {
+    setQuestionAnswer(e.target.value)
+    questionAnswer = e.target.value
+    console.log(questionAnswer)
+  };
+
+  const handleQuestionBooleanChange = (e) => {
+    setQuestionBoolean(e.target.value)
+    questionBoolean = e.target.value
+    console.log(questionBoolean)
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onQuestionSubmit({ type: questionType, ...question });
-    setQuestion({});
-    setQuestionType(null);
+
+    var body = {
+      questionType: 'questionType',
+      questionText: 'questionText',
+      questionAnswer: 'questionAnswer',
+      questionBoolean: 'questionBoolean'
+    };
+  
+    axios.post('https://api.example.com/', body)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    questionType = ""
+    questionText = ""
+    questionBoolean = ""
+    questionAnswer = ""
   };
 
   return (
@@ -47,8 +78,8 @@ const QuestionForm = ({ onQuestionSubmit }) => {
             <input
               type="text"
               name="text"
-              value={question.text || ""}
-              onChange={handleQuestionChange}
+              value={questionText || ""}
+              onChange={handleQuestionTextChange}
             />
           </label>
           {questionType === "single" ||
@@ -59,8 +90,8 @@ const QuestionForm = ({ onQuestionSubmit }) => {
               <input
                 type="text"
                 name="answers"
-                value={question.answers || ""}
-                onChange={handleQuestionChange}
+                value={questionAnswer || ""}
+                onChange={handleQuestionAnswerChange}
               />
             </label>
           ) : null}
@@ -69,8 +100,8 @@ const QuestionForm = ({ onQuestionSubmit }) => {
               Answer:
               <select
                 name="answer"
-                value={question.answer || ""}
-                onChange={handleQuestionChange}
+                value={questionBoolean || ""}
+                onChange={handleQuestionBooleanChange}
               >
                 <option value="">Select an answer</option>
                 <option value="true">True</option>

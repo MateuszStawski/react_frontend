@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SettingsForm = ({ onSettingsSubmit }) => {
+const Ranking = ({ onSettingsSubmit }) => {
   const [settings, setSettings] = useState({});
 
   const handleChange = (e) => {
@@ -45,4 +45,4 @@ const SettingsForm = ({ onSettingsSubmit }) => {
   );
 };
 
-export default SettingsForm;
+export default Ranking;

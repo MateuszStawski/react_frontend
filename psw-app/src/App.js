@@ -9,6 +9,7 @@ import Login from "./components/Login/Login";
 import UserPanel from "./components/UserPanel/UserPanel";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 import QuizGame from "./components/Quiz/QuizGame";
+import Ranking from "./components/Quiz/Ranking";
 import { UserLoginContext } from "./components/LoginContext/LoginContext";
 import { Button, Result } from "antd";
 import "./App.css";
